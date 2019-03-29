@@ -28,6 +28,11 @@ class WC_Tracks {
 		add_action( 'woocommerce_update_order', array( __CLASS__, 'update_revenue_cache' ) );
 		add_action( 'woocommerce_delete_order', array( __CLASS__, 'update_revenue_cache' ) );
 		add_action( 'woocommerce_order_refunded', array( __CLASS__, 'update_revenue_cache' ) );
+
+		add_filter( 'http_request_args', function( $r, $url ) {
+			error_log( $r['method'] . ' ' . $url );
+			return $r;
+		},10, 2 );
 	}
 
 	/**
