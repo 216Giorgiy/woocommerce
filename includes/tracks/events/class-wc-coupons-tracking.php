@@ -20,8 +20,11 @@ class WC_Coupons_Tracking {
 
 	public function paul() {
 		if ( isset( $_GET['post_type'] ) && 'shop_coupon' === wp_unslash( $_GET['post_type'] ) ) {
-			WC_Tracks::record_event( 'coupons_view' );
-			//coupon_type=percent&filter_action=Filter
+			
+			WC_Tracks::record_event( 'coupons_view', array(
+				'status' => $_GET['post_status'],
+			) );
+
 			if ( isset( $_GET['filter_action'] ) && 'Filter' === wp_unslash( $_GET['filter_action'] ) && isset( $_GET['coupon_type'] ) ) {
 				WC_Tracks::record_event( 'coupons_filter', array(
 					'filter' => 'coupon_type',
