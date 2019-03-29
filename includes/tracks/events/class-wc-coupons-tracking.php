@@ -23,9 +23,16 @@ class WC_Coupons_Tracking {
 			WC_Tracks::record_event( 'coupons_view' );
 			//coupon_type=percent&filter_action=Filter
 			if ( isset( $_GET['filter_action'] ) && 'Filter' === wp_unslash( $_GET['filter_action'] ) && isset( $_GET['coupon_type'] ) ) {
-				WC_Tracks::record_event( 'wcadmin_coupons_filter', array(
+				WC_Tracks::record_event( 'coupons_filter', array(
 					'filter' => 'coupon_type',
 					'value'  => wp_unslash( $_GET['coupon_type'] ),
+				) );
+			}
+
+			if ( isset( $_GET['s'] ) ) {
+				WC_Tracks::record_event( 'coupons_search', array(
+					'filter' => 'search',
+					'value'  => wp_unslash( $_GET['s'] ),
 				) );
 			}
 		}
